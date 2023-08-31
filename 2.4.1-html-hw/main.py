@@ -12,13 +12,14 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 UDP_IP = '127.0.0.1'
 UDP_PORT = 5000
 
+
 class HttpHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         pr_url = urllib.parse.urlparse(self.path)
         if pr_url.path == '/':
             self.send_html_file('index.html')
-        elif pr_url.path == '/contact':
-            self.send_html_file('contact.html')
+        elif pr_url.path == '/message':
+            self.send_html_file('message.html')
         else:
             if pathlib.Path().joinpath(pr_url.path[1:]).exists():
                 self.send_static()
@@ -59,16 +60,8 @@ def run(server_class=HTTPServer, handler_class=HttpHandler):
     except KeyboardInterrupt:
         http.server_close()
 
-def save_to_json(data):
-    with open('storage/data.json', 'r') as json_file:
-        data_dict = json.load(json_file)
 
-    data_dict[str(datetime.datetime.now())] = data
-
-    with open('storage/data.json', 'w') as storage:
-        json.dump(data_dict, storage, indent=4)
-
-def run_server(ip, port):
+def run_socket(ip, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server = ip, port
     sock.bind(server)
@@ -85,6 +78,7 @@ def run_server(ip, port):
     finally:
         sock.close()
 
+
 def client_send_data(ip, port, data):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server = ip, port
@@ -94,9 +88,19 @@ def client_send_data(ip, port, data):
     sock.close()
 
 
-if __name__ == '__main__':
-    server = threading.Thread(target=run_server, args=(UDP_IP, UDP_PORT))
-    server1 = threading.Thread(target=run)
+def save_to_json(data):
+    with open('storage/data.json', 'r') as json_file:
+        data_dict = json.load(json_file)
 
-    server.start()
-    server1.start()
+    data_dict[str(datetime.datetime.now())] = data
+
+    with open('storage/data.json', 'w') as storage:
+        json.dump(data_dict, storage, indent=4)
+
+
+if __name__ == '__main__':
+    socket_thread = threading.Thread(target=run_socket, args=(UDP_IP, UDP_PORT))
+    server_thread = threading.Thread(target=run)
+
+    socket_thread.start()
+    server_thread.start()
