@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "2-2-1-poetry"
+version = "0.1.0"
+description = ""
+authors = ["1Pvvv <potap.iv@pm.me>"]
+readme = "README.md"
+packages = [{include = "2"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
