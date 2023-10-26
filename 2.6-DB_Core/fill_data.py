@@ -16,7 +16,6 @@ def generate_fake_data(number_groups, number_students, number_subjects, number_t
     fake_students = list()
     fake_subjects = list()
     fake_teachers = list()
-    fake_grades = list()
     fake_data = Faker()
 
     for _ in range(number_groups):
@@ -31,16 +30,10 @@ def generate_fake_data(number_groups, number_students, number_subjects, number_t
     for _ in range(number_subjects):
         fake_subjects.append(fake_data.catch_phrase())
 
-    for _ in range(number_students * number_subjects):
-        one_subject_grades = []
-        for __ in range(randint(3, 20)):
-            one_subject_grades.append(randint(1, 100))
-        fake_grades.append(tuple(one_subject_grades))
-
-    return fake_groups, fake_students, fake_subjects, fake_teachers, fake_grades
+    return fake_groups, fake_students, fake_subjects, fake_teachers
 
 
-def prepare_data(groups, students, subjects, grades) -> tuple():
+def prepare_data(groups, students, subjects) -> tuple():
     for_groups = list()
     for group in groups:
         for_groups.append((group,))
@@ -96,6 +89,6 @@ def insert_data_to_db(groups, students, subjects, teachers, grades) -> None:
 groups, students, subjects, teachers, grades = generate_fake_data(
     NUMBER_GROUPS, NUMBER_STUDENTS, NUMBER_SUBJECTS, NUMBER_TEACHERS)
 
-groups, students, subjects, grades = prepare_data(groups, students, subjects, grades)
+groups, students, subjects, grades = prepare_data(groups, students, subjects)
 
 insert_data_to_db(groups, students, subjects, teachers, grades)
