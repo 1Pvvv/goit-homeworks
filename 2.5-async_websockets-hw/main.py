@@ -16,6 +16,7 @@ def convert_int_to_dates(days_count: int):
         dates.append(date.strftime("%d.%m.%Y"))
     return dates
 
+
 async def get_exchange_rate(session, date):
     url = f"https://api.privatbank.ua/p24api/exchange_rates?date={date}"
     try:
@@ -26,6 +27,7 @@ async def get_exchange_rate(session, date):
                 print(f"Error status: {response.status} for {url}")
     except aiohttp.ClientConnectorError as err:
         print(f'Connection error: {url}', str(err))
+
 
 async def main(days: int):
     dates_list = convert_int_to_dates(days)
