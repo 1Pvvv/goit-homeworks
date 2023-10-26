@@ -94,10 +94,11 @@ def db_clear():
     session.commit()
 
 
-db_clear()
+if __name__ == "__main__":
+    db_clear()
 
-fake_groups()
-fake_teachers()
-fake_students()
-fake_subjects()
-fake_grades()
+    fake_groups()
+    fake_teachers()
+    fake_students()
+    fake_subjects()
+    fake_grades()
