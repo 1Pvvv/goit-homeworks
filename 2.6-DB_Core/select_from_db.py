@@ -18,5 +18,8 @@ def select_from_db(query_number: int) -> list:
         return cur.fetchall()
 
 
-query_number = int(sys.argv[1])
+try:
+    query_number = int(sys.argv[1])
+except IndexError:
+    query_number = 0
 pprint(select_from_db(query_number))

@@ -86,7 +86,7 @@ def insert_data_to_db(groups, students, subjects, teachers, grades) -> None:
         con.commit()
 
 
-groups, students, subjects, teachers, grades = generate_fake_data(
+groups, students, subjects, teachers = generate_fake_data(
     NUMBER_GROUPS, NUMBER_STUDENTS, NUMBER_SUBJECTS, NUMBER_TEACHERS)
 
 groups, students, subjects, grades = prepare_data(groups, students, subjects)
