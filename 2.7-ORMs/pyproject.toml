@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "2-7-orms"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "2"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = "^2.0.22"
+alembic = "^1.12.0"
+psycopg2 = "^2.9.9"
+faker = "^19.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
