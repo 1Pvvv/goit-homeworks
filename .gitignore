@@ -15,6 +15,7 @@ __pycache__/
 *.swp
 
 # Игнорирование секретных данных
+config.ini
 secret_key.txt
 sensitive_data.json
 
