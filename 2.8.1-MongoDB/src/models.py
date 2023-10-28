@@ -1,5 +1,11 @@
 from mongoengine import EmbeddedDocument, Document
-from mongoengine.fields import DateTimeField, EmbeddedDocumentField, ListField, StringField, ReferenceField
+from mongoengine.fields import (
+    DateTimeField,
+    EmbeddedDocumentField,
+    ListField,
+    StringField,
+    ReferenceField,
+)
 
 
 class Tag(EmbeddedDocument):
