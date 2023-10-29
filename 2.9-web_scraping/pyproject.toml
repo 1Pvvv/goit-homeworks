@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "2-9-web-scraping"
+version = "0.1.0"
+description = ""
+authors = ["1Pvvv <potap.iv@pm.me>"]
+readme = "README.md"
+packages = [{include = "2"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+lxml = "^4.9.3"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
+mongoengine = "^0.27.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
