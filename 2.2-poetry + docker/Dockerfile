@@ -1,27 +1,16 @@
-# Docker-команда FROM указывает базовый образ контейнера
-# Наш базовый образ - это Linux с предустановленным python-3.11
 FROM python:3.11
 
-# Установим переменную окружения
-ENV PYTHONUNBUFFERED 1
+RUN pip install poetry
 
-# Установим рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Скопируем остальные файлы в рабочую директорию контейнера
-COPY pyproject.toml poetry.lock /app/
+COPY pyproject.toml poetry.lock ./
 
-# Установим poetry
-RUN pip install poetry && poetry config virtualenvs.create false
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-interaction --no-root
 
-# Установим зависимости проекта
-#RUN poetry install
+COPY . .
 
-# Скопируем остальные файлы проекта в рабочую директорию
-COPY . /app/
+WORKDIR /app/2_2_poetry
 
-# Переходим в рабочую директорию внутри контейнера
-WORKDIR /app/2-2-poetry
-
-# Запустим наше приложение
-CMD ["python", "__init__.py"]
+CMD ["python3", "__init__.py"]
